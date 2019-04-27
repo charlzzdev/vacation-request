@@ -5,16 +5,17 @@ import 'firebase/firestore'
 
 const GeneralView = ({ userInfo }) => {
       const [newUser, setNewUser] = useState(false);
-      const [name, setName] = useState({});
+      const [userData, setUserData] = useState({});
 
       useEffect(() => {
-            firebase.firestore().doc(`users/${userInfo.user.email}`).get().then(user => {
+            firebase.firestore().doc(`users/${userInfo.user.email}`).onSnapshot(user => {
                   if (user.data() === undefined) {
                         setNewUser(true);
                   } else {
-                        setName({
+                        setUserData({
                               firstName: user.data().firstName,
-                              lastName: user.data().lastName
+                              lastName: user.data().lastName,
+                              vacationDays: user.data().vacationDays
                         });
                   }
             })
@@ -40,7 +41,7 @@ const GeneralView = ({ userInfo }) => {
                         firstName: e.target[1].value,
                         lastName: e.target[0].value
                   };
-                  setName(nameObj);
+                  setUserData(nameObj);
                   firebase.firestore().collection('users').doc(userInfo.user.email).set(nameObj);
                   setNewUser(false);
             }
@@ -78,14 +79,25 @@ const GeneralView = ({ userInfo }) => {
                                     <Button>Ok</Button>
                               </form>
                               :
-                              <form className="GeneralView" onSubmit={handleVacationSubmit}>
-                                    <div className="info-text">Szabadnap kezelés <strong>{name.lastName} {name.firstName}</strong> számára</div>
-                                    <div className="date-wrapper">
-                                          <DatePicker label="Ettől" options={dateOptions} id="from-date" />
-                                          <DatePicker label="Eddig" options={dateOptions} id="to-date" />
-                                    </div>
-                                    <Button>Szabadnap kérelmezése</Button>
-                              </form>
+                              <>
+                                    <form className="GeneralView" onSubmit={handleVacationSubmit}>
+                                          <div className="info-text">Szabadnap kezelés <strong>{userData.lastName} {userData.firstName}</strong> számára</div>
+                                          <div className="date-wrapper">
+                                                <DatePicker label="Ettől" options={dateOptions} id="from-date" />
+                                                <DatePicker label="Eddig" options={dateOptions} id="to-date" />
+                                          </div>
+                                          <Button>Szabadnap kérelmezése</Button>
+                                    </form>
+
+                                    <div className="info-text">Kivett szabadnapok listája</div>
+                                    <ul>
+                                          {
+                                                userData.vacationDays ? userData.vacationDays.map(date => (
+                                                      <li key={date.from}>{date.from} - {date.to}</li>
+                                                )) : <li>Még nem kértél szabadnapot.</li>
+                                          }
+                                    </ul>
+                              </>
                   }
             </>
       )
