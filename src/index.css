@@ -1,5 +1,93 @@
-body {
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+html, body{
+      height: 100vh;
+}
+
+*{
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+}
+
+body {
+      font-family: 'Lato', sans-serif;
+}
+
+.App{
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.Login{
+      background: #f8f8f8;
+      padding: 2rem 3rem;
+      width: 20vw;
+      border-radius: 20px;
+      box-shadow: 0 0 10px #50505042;
+}
+
+.Login h1{
+      padding-bottom: 1rem;
+      color:#333;
+}
+
+.input-field{
+      position: relative;
+      margin: 1rem 0;
+}
+
+.input-field label{
+      position: absolute;
+      top: -0.5rem;
+      left: 1rem;
+      font-size: 14px;
+      background: #f8f8f8;
+      padding: 0 0.4rem;
+      color: #888;
+}
+
+.input-field input{
+      padding: 0.65rem;
+      background: #f8f8f8;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 7px;
+}
+
+input:-webkit-autofill  {
+      box-shadow: 0 0 0 30px #f8f8f8 inset !important;
+}
+
+:focus{
+      outline: 0;
+}
+
+.btn{
+      font-family: 'Lato', sans-serif;
+      width: 100%;
+      border: 0;
+      background: #333;
+      color: #fff;
+      padding: 0.5rem;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: background 300ms;
+}
+
+.btn:hover{
+      background: #555;
+}
+
+@media(max-width: 1480px){
+      .Login{
+            width: 40vw;
+      }
+}
+@media(max-width: 750px){
+      .Login{
+            width: 90vw;
+      }
 }
