@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Login from './Login';
 
 function App() {
+      const [userInfo, setUserInfo] = useState({});
+
       return (
             <div className="App">
-                  <Login />
+                  {
+                        userInfo.hasOwnProperty('user') ? (
+                              <div>
+                                    logged in {console.log(userInfo)}
+                              </div>
+                        ) : <Login setUserInfo={setUserInfo} />
+                  }
             </div>
       );
 }

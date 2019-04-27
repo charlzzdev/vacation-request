@@ -3,6 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import firebase from 'firebase/app';
+
+firebase.initializeApp({
+      apiKey: "AIzaSyA0TE9Ro_4d053IklE1PkpQ6sT6irvcklg",
+      authDomain: "szabadnap-precise-elektrik.firebaseapp.com",
+      databaseURL: "https://szabadnap-precise-elektrik.firebaseio.com",
+      projectId: "szabadnap-precise-elektrik",
+      storageBucket: "szabadnap-precise-elektrik.appspot.com",
+      messagingSenderId: "1040303550277"
+});
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
