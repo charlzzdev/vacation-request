@@ -1,6 +1,7 @@
 import React from 'react'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import { TextInput, Button } from 'react-materialize'
 
 const Login = ({ setUserInfo }) => {
       const handleSubmit = (e) => {
@@ -12,15 +13,9 @@ const Login = ({ setUserInfo }) => {
       return (
             <form className="Login" onSubmit={handleSubmit}>
                   <h1>Bejelentkezés</h1>
-                  <div className="input-field">
-                        <label>E-mail</label>
-                        <input type="text" name="email" autoFocus />
-                  </div>
-                  <div className="input-field">
-                        <label>Jelszó</label>
-                        <input type="password" name="password" />
-                  </div>
-                  <button className="btn">Bejelentkezés</button>
+                  <TextInput type="email" label="E-mail" />
+                  <TextInput type="password" label="Jelszó" />
+                  <Button>Bejelentkezés</Button>
             </form>
       )
 }

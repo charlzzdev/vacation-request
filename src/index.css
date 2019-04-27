@@ -31,54 +31,35 @@ body {
 
 .Login h1{
       padding-bottom: 1rem;
+      font-size: 2rem;
       color:#333;
 }
 
-.input-field{
-      position: relative;
-      margin: 1rem 0;
-}
-
 .input-field label{
-      position: absolute;
-      top: -0.5rem;
-      left: 1rem;
-      font-size: 14px;
-      background: #f8f8f8;
-      padding: 0 0.4rem;
-      color: #888;
-}
-
-.input-field input{
-      padding: 0.65rem;
-      background: #f8f8f8;
-      width: 100%;
-      border: 1px solid #ddd;
-      border-radius: 7px;
-}
-
-input:-webkit-autofill  {
-      box-shadow: 0 0 0 30px #f8f8f8 inset !important;
-}
-
-:focus{
-      outline: 0;
+      pointer-events: none;
 }
 
 .btn{
-      font-family: 'Lato', sans-serif;
-      width: 100%;
-      border: 0;
       background: #333;
-      color: #fff;
-      padding: 0.5rem;
-      border-radius: 7px;
-      cursor: pointer;
-      transition: background 300ms;
+      box-shadow: none;
+      border-radius: 20px;
 }
 
 .btn:hover{
       background: #555;
+      box-shadow: none;
+}
+
+.Login .btn{
+      width: 100%;
+}
+
+.datepicker-table td{
+      width: 40px;
+}
+
+.datepicker-controls .select-month input{
+      width: 85px;
 }
 
 @media(max-width: 1480px){
