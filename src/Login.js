@@ -1,6 +1,7 @@
 import React from 'react'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import 'firebase/firestore'
 import { TextInput, Button } from 'react-materialize'
 
 const Login = ({ setUserInfo }) => {
