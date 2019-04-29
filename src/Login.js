@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
-import { TextInput, Button } from 'react-materialize'
+import { TextInput, Button, Preloader } from 'react-materialize'
 
 const Login = ({ setUserInfo }) => {
+      const [loading, setLoading] = useState(false);
+
       const handleSubmit = (e) => {
             e.preventDefault();
+            setLoading(true);
             firebase.auth().signInWithEmailAndPassword(e.target[0].value, e.target[1].value)
-                  .then(data => setUserInfo(data));
+                  .then(data => {
+                        setUserInfo(data);
+                        setLoading(false);
+                  });
       }
 
       return (
@@ -17,6 +23,9 @@ const Login = ({ setUserInfo }) => {
                   <TextInput type="email" label="E-mail" />
                   <TextInput type="password" label="Jelszó" />
                   <Button>Bejelentkezés</Button>
+                  <div style={{ textAlign: 'center', paddingTop: '1rem' }}>
+                        {loading && <Preloader flashing />}
+                  </div>
             </form>
       )
 }

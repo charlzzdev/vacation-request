@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { DatePicker, Button, TextInput } from 'react-materialize'
+import { DatePicker, Button, TextInput, Preloader } from 'react-materialize'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 const GeneralView = ({ userInfo }) => {
       const [newUser, setNewUser] = useState(false);
       const [userData, setUserData] = useState({});
+      const [loading, setLoading] = useState(true);
 
       useEffect(() => {
             firebase.firestore().doc(`users/${userInfo.user.email}`).onSnapshot(user => {
@@ -18,6 +19,7 @@ const GeneralView = ({ userInfo }) => {
                               vacationDays: user.data().vacationDays
                         });
                   }
+                  setLoading(false);
             })
       }, [userInfo.user.email]);
 
@@ -94,8 +96,9 @@ const GeneralView = ({ userInfo }) => {
                                           {
                                                 userData.vacationDays ? userData.vacationDays.map(date => (
                                                       <li key={date.from}>{date.from} - {date.to}</li>
-                                                )) : <li>Még nem kértél szabadnapot.</li>
+                                                )) : !loading && <li>Még nem kértél szabadnapot.</li>
                                           }
+                                          {loading && <Preloader flashing />}
                                     </ul>
                               </>
                   }
