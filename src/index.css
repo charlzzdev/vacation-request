@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
-html, body{
-      height: 100vh;
-}
-
 *{
       margin: 0;
       padding: 0;
@@ -15,7 +11,7 @@ body {
 }
 
 .App{
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -86,7 +82,7 @@ strong{
       font-weight: 700;
 }
 
-ul{
+.personal-vacation-list{
       min-height: 30vh;
       max-height: 30vh;
       background: #f2f2f2;
@@ -98,6 +94,20 @@ li{
       margin-bottom: 0.3rem;
 }
 
+.AdminView{
+      display: flex;
+      width: 60%;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+}
+
+.admin-view-item{
+      background: #f8f8f8;
+      padding: 1rem 2rem;
+      margin: 1rem 0;
+      box-shadow: 2px 2px 5px #8888883f;
+      border-radius: 7px;
+}
 
 @media(max-width: 1480px){
       .Login{

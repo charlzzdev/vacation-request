@@ -90,7 +90,7 @@ const GeneralView = ({ userInfo }) => {
                                     </form>
 
                                     <div className="info-text">Kivett szabadnapok listája</div>
-                                    <ul>
+                                    <ul className="personal-vacation-list">
                                           {
                                                 userData.vacationDays ? userData.vacationDays.map(date => (
                                                       <li key={date.from}>{date.from} - {date.to}</li>
