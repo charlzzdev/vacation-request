@@ -6,6 +6,7 @@ import { TextInput, Button, Preloader } from 'react-materialize'
 
 const Login = ({ setUserInfo }) => {
       const [loading, setLoading] = useState(false);
+      const [error, setError] = useState(false);
 
       const handleSubmit = (e) => {
             e.preventDefault();
@@ -13,6 +14,9 @@ const Login = ({ setUserInfo }) => {
             firebase.auth().signInWithEmailAndPassword(e.target[0].value, e.target[1].value)
                   .then(data => {
                         setUserInfo(data);
+                  })
+                  .catch(err => {
+                        setError(true);
                         setLoading(false);
                   });
       }
@@ -25,6 +29,7 @@ const Login = ({ setUserInfo }) => {
                   <Button>Bejelentkezés</Button>
                   <div style={{ textAlign: 'center', paddingTop: '1rem' }}>
                         {loading && <Preloader flashing />}
+                        {!loading && error && <strong style={{color: 'red'}}>Hibás e-mail vagy jelszó.</strong>}
                   </div>
             </form>
       )
