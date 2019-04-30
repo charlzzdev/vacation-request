@@ -95,7 +95,9 @@ const GeneralView = ({ userInfo }) => {
                                     <ul className="personal-vacation-list">
                                           {
                                                 userData.vacationDays ? userData.vacationDays.map(date => (
-                                                      <li key={date.from}>{date.from} - {date.to}</li>
+                                                      <li key={date.from} style={{
+                                                            background: date.status === 'approved' ? '#2ad61a80' : date.status === 'denied' ? '#d61a1a80' : '#fcf01180'
+                                                      }}>{date.from} - {date.to}</li>
                                                 )) : !loading && <li>Még nem kértél szabadnapot.</li>
                                           }
                                           {loading && <Preloader flashing />}
