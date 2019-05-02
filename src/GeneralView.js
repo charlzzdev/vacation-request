@@ -16,7 +16,8 @@ const GeneralView = ({ userInfo }) => {
                         setUserData({
                               firstName: user.data().firstName,
                               lastName: user.data().lastName,
-                              vacationDays: user.data().vacationDays
+                              vacationDays: user.data().vacationDays,
+                              daysLeft: user.data().daysLeft
                         });
                   }
                   setLoading(false);
@@ -83,7 +84,8 @@ const GeneralView = ({ userInfo }) => {
                               :
                               <>
                                     <form className="GeneralView" onSubmit={handleVacationSubmit}>
-                                          <div className="info-text">Szabadnap kezelés <strong>{userData.lastName} {userData.firstName}</strong> számára</div>
+                                          <h4>Szabadnap kezelés <strong>{userData.lastName} {userData.firstName}</strong> számára</h4>
+                                          <h6>Felhasználható munkanapok száma: <strong>{userData.daysLeft}</strong></h6>
                                           <div className="date-wrapper">
                                                 <DatePicker label="Ettől" options={dateOptions} id="from-date" />
                                                 <DatePicker label="Eddig" options={dateOptions} id="to-date" />
@@ -91,7 +93,7 @@ const GeneralView = ({ userInfo }) => {
                                           <Button>Szabadnap kérelmezése</Button>
                                     </form>
 
-                                    <div className="info-text">Kivett szabadnapok listája</div>
+                                    <h4>Kivett szabadnapok listája</h4>
                                     <ul className="personal-vacation-list">
                                           {
                                                 userData.vacationDays ? userData.vacationDays.map(date => (

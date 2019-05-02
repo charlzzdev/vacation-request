@@ -74,10 +74,6 @@ body {
       justify-content: space-evenly;
 }
 
-.info-text{
-      font-size: 2rem;
-}
-
 strong{
       font-weight: 700;
 }
@@ -119,6 +115,12 @@ li{
 
 .fa-check-circle:hover{color:#2ad61a}
 .fa-times-circle:hover{color:#d61a1a}
+
+.daysLeftForm{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+}
 
 @media(max-width: 1480px){
       .Login{

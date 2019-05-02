@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { Preloader } from 'react-materialize'
+import { Preloader, TextInput, Button } from 'react-materialize'
 
 const AdminView = () => {
       const [vacationList, setVacationList] = useState([]);
@@ -15,7 +15,9 @@ const AdminView = () => {
                               ...vacation,
                               {
                                     name: `${doc.data().lastName} ${doc.data().firstName}`,
-                                    vacationDays: doc.data().vacationDays || []
+                                    vacationDays: doc.data().vacationDays || [],
+                                    daysLeft: doc.data().daysLeft,
+                                    email: doc.id
                               }
                         ])
                   })
@@ -36,7 +38,7 @@ const AdminView = () => {
                                     ...doc.data().vacationDays[indexInVacationDays],
                                     status: decision
                               };
-                              
+
                               firebase.firestore().collection('users').doc(doc.id).update({
                                     vacationDays: result
                               });
@@ -44,12 +46,28 @@ const AdminView = () => {
                   })
       }
 
+      const handleDaysLeftSubmit = (e, email) => {
+            e.preventDefault();
+            firebase.firestore().doc(`users/${email}`).update({ daysLeft: e.target[0].value });
+      }
+
       return (
             <div className="AdminView">
                   {
                         vacationList.length > 0 ? vacationList.map(vacation => (
-                              vacation.vacationDays.length > 0 && <div key={vacation.name} className="admin-view-item">
+                              vacation.vacationDays.length > 0 && <div key={vacation.email} className="admin-view-item">
                                     <h6 style={{ fontWeight: 700 }}>{vacation.name}</h6>
+                                    <form className="daysLeftForm" onSubmit={(e) => handleDaysLeftSubmit(e, vacation.email)}>
+                                          <TextInput
+                                                type="number"
+                                                placeholder={vacation.daysLeft}
+                                                label="Hátralévő napok"
+                                                onFocus={(e) => {
+                                                      e.target.value = vacation.daysLeft
+                                                }}
+                                          />
+                                          <Button>OK</Button>
+                                    </form>
                                     <ul>
                                           {
                                                 vacation.vacationDays.map((date, i) => (
